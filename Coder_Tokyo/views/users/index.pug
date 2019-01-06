@@ -1,5 +1,9 @@
 h1 Users
 
+a(href="/users/create") Add new User
+br
+br
+
 //create form
 form(action="/users/search", method="GET") 
     //display name in query string, example q=linh
@@ -7,9 +11,10 @@ form(action="/users/search", method="GET")
     button search
 
 // display ul li with nam in users
-ul
-    //val display index
-    each user in users
-        li= user.name
-        
-    
+.container
+    .row
+        ul.col-md-12
+            //val display index
+            each user in users
+                li= user.name
+

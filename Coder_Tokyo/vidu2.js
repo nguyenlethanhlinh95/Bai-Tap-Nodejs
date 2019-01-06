@@ -1,10 +1,14 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var port = 8000;
 
 // user template in view folder with index.pug
 app.set('view engine', 'pug');
 app.set('views','./views');
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 var users = [
     {id: 1,name: 'Linh'},
@@ -24,6 +28,17 @@ app.get('/users', function(req,res){
     {
         users: users
     });
+});
+
+// users create get form
+app.get('/users/create', function(req,res){
+    res.render('users/create');
+});
+
+// users create post form
+app.post('/users/create', function(req,res){
+    users.push(req.body);
+    res.redirect('/users');
 });
 
 // Query string
