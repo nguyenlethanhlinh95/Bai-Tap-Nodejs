@@ -1,19 +1,10 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var shortid = require('shortid'); // id identity
+
 var app = express();
 var port = 8000;
 
-// import lowdb
-var low = require('lowdb');
-var FileSync = require('lowdb/adapters/FileSync');
-var adapter = new FileSync('db.json');
-
-db = low(adapter)
-
-// Set some defaults (required if your JSON file is empty)
-db.defaults({ users: [] })
-  .write()
+var userRouter = require('./routers.js/user.route');
 
 
 // user template in view folder with index.pug
@@ -29,6 +20,9 @@ app.get('/', function(req,res){
         'name': 'aaa'
     });
 });
+
+// call user router
+app.use('/users',userRouter);
 
 //listenning
 app.listen(port);
